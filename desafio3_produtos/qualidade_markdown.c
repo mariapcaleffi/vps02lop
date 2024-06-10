@@ -11,7 +11,7 @@ typedef struct {
 } Produto;
 
 int main() {
-	setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "");
     FILE *arquivo;
     Produto produtos[MAX_PRODUTOS];
     int i, n_produtos = 0;
@@ -66,15 +66,17 @@ int main() {
             indice_min_durabilidade = i;
         }
     }
+	
+	FILE *md;
+	md = fopen("qualidade.md", "w");
 
-    
-    printf("|ANÁLISE DE QUALIDADE|\n");
-    printf("Média de resistência: %.2f\n", media_resistencia);
-    printf("Média de durabilidade: %.2f\n", media_durabilidade);
-    printf("Produto com maior resistência: %d (%d)\n", max_resistencia, produtos[indice_max_resistencia].numero_de_serie);
-    printf("Produto com menor resistência: %d (%d)\n", min_resistencia, produtos[indice_min_resistencia].numero_de_serie);
-    printf("Produto com maior durabilidade: %d (%d)\n", max_durabilidade, produtos[indice_max_durabilidade].numero_de_serie);
-    printf("Produto com menor durabilidade: %d (%d)\n", min_durabilidade, produtos[indice_min_durabilidade].numero_de_serie);
+	fprintf(md,"# ANÁLISE DE QUALIDADE\n");
+    fprintf(md,"*Média de resistência:* %.2f\n", media_resistencia);
+    fprintf(md,"*Média de durabilidade:* %.2f\n", media_durabilidade);
+    fprintf(md,"*Produto com maior resistência:* %d (%d)\n", max_resistencia, produtos[indice_max_resistencia].numero_de_serie);
+    fprintf(md,"*Produto com menor resistência:* %d (%d)\n", min_resistencia, produtos[indice_min_resistencia].numero_de_serie);
+    fprintf(md,"*Produto com maior durabilidade:* %d (%d)\n", max_durabilidade, produtos[indice_max_durabilidade].numero_de_serie);
+    fprintf(md,"*Produto com menor durabilidade:* %d (%d)\n", min_durabilidade, produtos[indice_min_durabilidade].numero_de_serie);
 
     int acima_media_resistencia = 0, abaixo_media_resistencia = 0;
     int acima_media_durabilidade = 0, abaixo_media_durabilidade = 0;
@@ -90,8 +92,11 @@ int main() {
             abaixo_media_durabilidade++;
         }
     }
-    printf("Produtos acima da média de resistência: %d\n", acima_media_resistencia);
-    printf("Produtos abaixo da média de resistência: %d\n", abaixo_media_resistencia);
-    printf("Produtos acima da média de durabilidade: %d\n", acima_media_durabilidade);
-    printf("Produtos abaixo da média de durabilidade: %d\n", abaixo_media_durabilidade);
+    fprintf(md, "*Produtos acima da média de resistência:* %d\n", acima_media_resistencia);
+    fprintf(md," *Produtos abaixo da média de resistência:* %d\n", abaixo_media_resistencia);
+    fprintf(md, "*Produtos acima da média de durabilidade:* %d\n", acima_media_durabilidade);
+    fprintf(md,"*Produtos abaixo da média de durabilidade:* %d\n", abaixo_media_durabilidade);
+    
+    printf("Arquivo MD alterado com sucesso.\n");
+    return 0;
 }
